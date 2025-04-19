@@ -77,9 +77,20 @@ public class Aplicacao {
     
     private static void listarMedicamentos() {
         System.out.println("\n=== MEDICAMENTOS DISPONÍVEIS ===");
+        System.out.println("+----------------------+------------+------------+---------------+----------------+");
+        System.out.println("| Nome                 | Preço (R$) | Quantidade | ID            | Data Validade  |");
+        System.out.println("+----------------------+------------+------------+---------------+----------------+");
+        
         for (Medicamento medicamento : repositorioMedicamentos.listarTodos()) {
-            System.out.println(medicamento);
+            System.out.printf("| %-20s | %10.2f | %10d | %-13s | %-14s |\n", 
+                medicamento.getNome(), 
+                medicamento.getPreco(), 
+                medicamento.getQuantidade(), 
+                medicamento.getId(), 
+                medicamento.getDataValidade().toString());
         }
+        
+        System.out.println("+----------------------+------------+------------+---------------+----------------+");
     }
     
     private static void adicionarMedicamento() {

@@ -120,6 +120,9 @@ public class Venda {
     public void imprimirDetalhes() {
         DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         
+        System.out.println("=================================================");
+        System.out.println("                DETALHES DA VENDA                ");
+        System.out.println("=================================================");
         System.out.println("Venda #" + vendaId);
         System.out.println("Data/Hora: " + dataHora.format(formatoData));
         System.out.println("Funcionário: " + funcionario.getNome());
@@ -130,16 +133,22 @@ public class Venda {
             System.out.println("Cliente: Não identificado");
         }
         
-        System.out.println("\nItens:");
+        System.out.println("\nITENS:");
+        System.out.println("+----------------------+------------+------------+----------------+");
+        System.out.println("| Medicamento          | Preço (R$) | Quantidade | Subtotal (R$)  |");
+        System.out.println("+----------------------+------------+------------+----------------+");
+        
         for (Map.Entry<Medicamento, Integer> item : itensVendidos.entrySet()) {
             Medicamento medicamento = item.getKey();
             int quantidade = item.getValue();
             double subtotal = medicamento.getPreco() * quantidade;
             
-            System.out.printf("- %s x%d: R$ %.2f (Subtotal: R$ %.2f)\n", 
-                medicamento.getNome(), quantidade, medicamento.getPreco(), subtotal);
+            System.out.printf("| %-20s | %10.2f | %10d | %14.2f |\n", 
+                medicamento.getNome(), medicamento.getPreco(), quantidade, subtotal);
         }
         
-        System.out.printf("\nValor Total: R$ %.2f\n", valorTotal);
+        System.out.println("+----------------------+------------+------------+----------------+");
+        System.out.printf("                                       Valor Total: R$ %.2f\n", valorTotal);
+        System.out.println("=================================================");
     }
 }
